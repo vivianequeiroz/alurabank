@@ -1,10 +1,6 @@
 class NegotiationController {
     
-    private _inputData;
-    private _inputAmount;
-    private _inputValue;
-
-    constructor() {
+    constructor(private _data: Date, private _amount: number, private _value: number) {
         // by the moment controller is instantiated, the dom elements will be available to manipulate
         this._inputData = document.querySelector('#data');
         this._inputAmount = document.querySelector('#amount');
