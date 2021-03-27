@@ -1,9 +1,8 @@
 class Negotiation {
-    constructor(date, amount, value) {
-        // ._ to indicate that the property can't be accessible out of the class 
-        this._date = date;
-        this._amount = amount;
-        this._value = value;
+    constructor(_date, _amount, _value) {
+        this._date = _date;
+        this._amount = _amount;
+        this._value = _value;
     }
     // methods that give access  to these properties
     get date() {
@@ -13,7 +12,7 @@ class Negotiation {
         return this._amount;
     }
     get value() {
-        return this.value;
+        return this._value;
     }
     get volume() {
         return this._amount * this._value;
