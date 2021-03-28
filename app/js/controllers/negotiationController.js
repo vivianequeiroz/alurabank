@@ -7,9 +7,11 @@ class NegotiationController {
         this._value = _value;
         //ts infer that when a value is assigned to an attribute, it is going to have the same type
         this._negotiations = new Negotiations();
+        this._negotiationsView = new NegotiationsView('#negotiationsView');
         this._inputDate = document.querySelector('#data');
         this._inputAmount = document.querySelector('#amount');
         this._inputValue = document.querySelector('#value');
+        this._negotiationsView.update();
     }
     add(event) {
         event.preventDefault();

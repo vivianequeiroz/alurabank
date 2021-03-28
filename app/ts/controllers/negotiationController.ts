@@ -5,6 +5,7 @@ class NegotiationController {
     private _inputValue: HTMLInputElement;
     //ts infer that when a value is assigned to an attribute, it is going to have the same type
     private _negotiations = new Negotiations();
+    private _negotiationsView = new NegotiationsView('#negotiationsView');
 
     constructor(private _data: Date, private _amount: number, private _value: number) {
         // by the moment controller is instantiated, the dom elements will be available to manipulate
@@ -13,6 +14,7 @@ class NegotiationController {
         this._inputDate = <HTMLInputElement>document.querySelector('#data');
         this._inputAmount = <HTMLInputElement>document.querySelector('#amount');
         this._inputValue = <HTMLInputElement>document.querySelector('#value');
+        this._negotiationsView.update();
     }
 
     add(event: Event) {
