@@ -1,18 +1,7 @@
-class MessageView {
+// view receives a generic type T that will be replace by the type String at the compilation 
+class MessageView  extends View<String> {
 
-    private _element: Element;
-
-    constructor(selector: string) {
-
-        this._element = document.querySelector(selector);
-    }
-
-    update(model: string) {
-
-        this._element.innerHTML = this.template(model);
-    }
-
-    template(model: string) {
+    template(model: string): string {
 
         return `<p class="alert alert-info">${model}</p>`;
     }
