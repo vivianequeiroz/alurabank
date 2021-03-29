@@ -6,15 +6,15 @@ class NegotiationController {
         this._negotiations = new Negotiations();
         this._negotiationsView = new NegotiationsView('#negotiationsView');
         this._messageView = new MessageView('#messageView');
-        this._inputDate = document.querySelector('#data');
-        this._inputAmount = document.querySelector('#amount');
-        this._inputValue = document.querySelector('#value');
+        this._inputDate = $('#data');
+        this._inputAmount = $('#amount');
+        this._inputValue = $('#value');
         // update the view to show model data - empty
         this._negotiationsView.update(this._negotiations);
     }
     add(event) {
         event.preventDefault();
-        const negotiation = new Negotiation(new Date(this._inputDate.value.replace(/-/g, ',')), parseInt(this._inputAmount.value), parseFloat(this._inputValue.value));
+        const negotiation = new Negotiation(new Date(this._inputDate.val().replace(/-/g, ',')), parseInt(this._inputAmount.val()), parseFloat(this._inputValue.val()));
         this._negotiations.add(negotiation);
         this._negotiations.toArray().forEach(negotiation => {
             console.log(negotiation.date);
