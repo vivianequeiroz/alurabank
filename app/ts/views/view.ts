@@ -1,7 +1,9 @@
-class View<T> {
+// classe trasformed into abstract class since View has no direct implementation 
+abstract class View<T> {
 
     // with protected only the methods from the class itself and its children can access properties 
-    protected _element: Element;
+    // by the access of properties made by the father (since heritage was used) protrected can now be replaced by private
+    private _element: Element;
 
     constructor(selector: string) {
 
@@ -13,9 +15,6 @@ class View<T> {
         this._element.innerHTML = this.template(model);
     }
 
-    template(model: T): string {
-        // return must be defined by children
-        throw Error('Você deve implementar o método template.');
-       
-    }
+    // the class that inherit this method is forced to fill it 
+    abstract template(model: T): string; 
 }
