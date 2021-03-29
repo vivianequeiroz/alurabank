@@ -5,6 +5,7 @@ class NegotiationController {
         //ts infer that when a value is assigned to an attribute, it is going to have the same type
         this._negotiations = new Negotiations();
         this._negotiationsView = new NegotiationsView('#negotiationsView');
+        this._messageView = new MessageView('#messageView');
         this._inputDate = document.querySelector('#data');
         this._inputAmount = document.querySelector('#amount');
         this._inputValue = document.querySelector('#value');
@@ -15,6 +16,12 @@ class NegotiationController {
         event.preventDefault();
         const negotiation = new Negotiation(new Date(this._inputDate.value.replace(/-/g, ',')), parseInt(this._inputAmount.value), parseFloat(this._inputValue.value));
         this._negotiations.add(negotiation);
+        this._negotiations.toArray().forEach(negotiation => {
+            console.log(negotiation.date);
+            console.log(negotiation.amount);
+            console.log(negotiation.value);
+        });
         this._negotiationsView.update(this._negotiations);
+        this._messageView.update('Negociação adicionada com sucesso!');
     }
 }
