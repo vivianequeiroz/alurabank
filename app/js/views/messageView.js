@@ -1,6 +1,9 @@
-// view receives a generic type T that will be replace by the type String at the compilation 
-class MessageView extends View {
-    template(model) {
-        return `<p class="alert alert-info">${model}</p>`;
+var Views;
+(function (Views) {
+    class MessageView extends Views.View {
+        template(model) {
+            return `<p class="alert alert-info">${model}</p>`;
+        }
     }
-}
+    Views.MessageView = MessageView;
+})(Views || (Views = {}));

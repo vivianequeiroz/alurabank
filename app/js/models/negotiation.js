@@ -4,7 +4,6 @@ class Negotiation {
         this._amount = _amount;
         this._value = _value;
     }
-    // methods that give access  to these properties
     get date() {
         return this._date;
     }

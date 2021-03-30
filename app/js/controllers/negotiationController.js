@@ -1,15 +1,11 @@
 class NegotiationController {
     constructor() {
-        // by the moment controller is instantiated, the dom elements will be available to manipulate
-        // casting <> to convert the most generic type to a more specific one
-        //ts infer that when a value is assigned to an attribute, it is going to have the same type
         this._negotiations = new Negotiations();
-        this._negotiationsView = new NegotiationsView('#negotiationsView');
-        this._messageView = new MessageView('#messageView');
+        this._negotiationsView = new Views.NegotiationsView('#negotiationsView');
+        this._messageView = new Views.MessageView('#messageView');
         this._inputDate = $('#data');
         this._inputAmount = $('#amount');
         this._inputValue = $('#value');
-        // update the view to show model data - empty
         this._negotiationsView.update(this._negotiations);
     }
     add(event) {
