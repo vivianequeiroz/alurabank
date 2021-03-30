@@ -1,5 +1,7 @@
+import { Negotiation } from './negotiation'
+
 // class to store the negotiations and prevent modifications at the list of negotiations made
-class Negotiations {
+export class Negotiations {
     // defining the type of array
     // Array<Negotiation> === Negotiation[]
     private _negotiations: Negotiation[] = [];

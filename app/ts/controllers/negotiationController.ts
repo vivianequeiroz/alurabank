@@ -1,12 +1,17 @@
-class NegotiationController {
+import { Negotiations } from '../models/negotiations';
+import { NegotiationsView } from './../views/negotiationsView';
+import { MessageView } from '../views/messageView';
+import { Negotiation } from '../models/negotiation';
+
+export class NegotiationController {
     
     private _inputDate: JQuery;
     private _inputAmount: JQuery;
     private _inputValue: JQuery;
     //ts infer that when a value is assigned to an attribute, it is going to have the same type
     private _negotiations = new Negotiations();
-    private _negotiationsView = new Views.NegotiationsView('#negotiationsView');
-    private _messageView = new  Views.MessageView('#messageView');
+    private _negotiationsView = new NegotiationsView('#negotiationsView');
+    private _messageView = new  MessageView('#messageView');
 
     constructor() {
         // by the moment controller is instantiated, the dom elements will be available to manipulate
