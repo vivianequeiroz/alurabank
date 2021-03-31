@@ -28,9 +28,9 @@ export class NegotiationController {
        
         event.preventDefault();
 
-        let data = new Date(this._inputData.val().replace(/-/g, ','));
+        let date = new Date(this._inputDate.val().replace(/-/g, ','));
 
-        if(data.getDay() == DayOfWeek.Saturday || data.getDay() == DayOfWeek.Sunday) {
+        if(!this._isBusinessDay(date)) {
 
             this._messageView.update('Somente negociações em dias úteis podem ser registradas!');
             return 
