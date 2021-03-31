@@ -1,6 +1,6 @@
 import { MessageView, NegotiationsView } from '../views/index';
 import { Negotiations, Negotiation } from '../models/index';
-
+import { logRuntime } from '../helpers/decorators/index';
 
 export class NegotiationController {
     
@@ -23,7 +23,7 @@ export class NegotiationController {
         this._negotiationsView.update(this._negotiations);
     }
     
-
+    @logRuntime()
     add(event: Event) {
        
         event.preventDefault();
