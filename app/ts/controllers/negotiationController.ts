@@ -9,8 +9,8 @@ export class NegotiationController {
     private _inputValue: JQuery;
     //ts infer that when a value is assigned to an attribute, it is going to have the same type
     private _negotiations = new Negotiations();
-    private _negotiationsView = new NegotiationsView('#negotiationsView');
-    private _messageView = new  MessageView('#messageView');
+    private _negotiationsView = new NegotiationsView('#negotiationsView', true);
+    private _messageView = new  MessageView('#messageView', true);
 
     constructor() {
         // by the moment controller is instantiated, the dom elements will be available to manipulate
@@ -22,10 +22,19 @@ export class NegotiationController {
         // update the view to show model data - empty
         this._negotiationsView.update(this._negotiations);
     }
+    
 
     add(event: Event) {
        
         event.preventDefault();
+
+        let data = new Date(this._inputData.val().replace(/-/g, ','));
+
+        if(data.getDay() == DayOfWeek.Saturday || data.getDay() == DayOfWeek.Sunday) {
+
+            this._messageView.update('Somente negociações em dias úteis podem ser registradas!');
+            return 
+        }
 
         const negotiation = new Negotiation (
            
@@ -45,4 +54,20 @@ export class NegotiationController {
         this._negotiationsView.update(this._negotiations);
         this._messageView.update('Negociação adicionada com sucesso!');
     }
+
+    private _isBusinessDay(date: Date) {
+        
+        return date.getDay() != DayOfWeek.Saturday && date.getDay() != DayOfWeek.Sunday;
+    }
+}
+
+
+enum DayOfWeek {
+    Sunday,
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday
 }

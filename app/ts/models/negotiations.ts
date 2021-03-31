@@ -17,7 +17,8 @@ export class Negotiations {
     toArray(): Negotiation[] {
         //.concat to prevent array modification by creating a new different one with the user information added
         // if user tries to delete it, a copy will be deleted and not the internet reference
-        return [].concat(this._negotiations);
+        return ([] as Negotiation[]).concat(this._negotiations);
+        // strictNullChecks -> ([] as Negotiation) necessary because the array that will be received could be of any type
     }
 
 }
