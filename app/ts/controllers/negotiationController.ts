@@ -1,12 +1,20 @@
 import { MessageView, NegotiationsView } from '../views/index';
 import { Negotiations, Negotiation } from '../models/index';
-import { logRuntime } from '../helpers/decorators/index';
+import { domInject } from '../helpers/decorators/domInject';
+// import { logRuntime } from '../helpers/decorators/index';
 
 export class NegotiationController {
+    // Decorators to do a lazy loading of the elements  // Decorators to do a lazy loading of the elements  // Decorators to do a lazy loading of the elements
     
+    @domInject('#date')
     private _inputDate: JQuery;
+
+    @domInject('#amount')
     private _inputAmount: JQuery;
+
+    @domInject('#value')
     private _inputValue: JQuery;
+  
     //ts infer that when a value is assigned to an attribute, it is going to have the same type
     private _negotiations = new Negotiations();
     private _negotiationsView = new NegotiationsView('#negotiationsView', true);
@@ -15,15 +23,12 @@ export class NegotiationController {
     constructor() {
         // by the moment controller is instantiated, the dom elements will be available to manipulate
         // casting <> to convert the most generic type to a more specific one
-        
-        this._inputDate = $('#data');
-        this._inputAmount = $('#amount');
-        this._inputValue = $('#value');
+
         // update the view to show model data - empty
         this._negotiationsView.update(this._negotiations);
     }
     
-    @logRuntime()
+    // @logRuntime()
     add(event: Event) {
        
         event.preventDefault();

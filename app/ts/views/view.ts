@@ -1,4 +1,4 @@
-import { logRuntime } from '../helpers/decorators/index';
+// import { logRuntime } from '../helpers/decorators/index';
 
 // classe trasformed into abstract class since View has no direct implementation 
 export abstract class View<T> {
@@ -14,7 +14,7 @@ export abstract class View<T> {
         this._escape = escape;
     }
 
-    @logRuntime(true)
+    // @logRuntime(true)
     update(model: T): void {
 
         this._element.html(this.template(model));
