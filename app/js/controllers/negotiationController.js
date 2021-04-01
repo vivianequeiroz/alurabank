@@ -48,6 +48,26 @@ System.register(["../views/index", "../models/index", "../helpers/decorators/dom
                 _isBusinessDay(date) {
                     return date.getDay() != DayOfWeek.Saturday && date.getDay() != DayOfWeek.Sunday;
                 }
+                importData() {
+                    function isOk(res) {
+                        if (res.ok) {
+                            return res;
+                        }
+                        else {
+                            throw new Error(res.statusText);
+                        }
+                    }
+                    fetch('http://localhost:8080/dados')
+                        .then(res => isOk(res))
+                        .then(res => res.json())
+                        .then((dados) => {
+                        dados
+                            .map(dado => new index_2.Negotiation(new Date(), dado.vezes, dado.montante))
+                            .forEach(negotiation => this._negotiations.add(negotiation));
+                        this._negotiationsView.update(this._negotiations);
+                    })
+                        .catch(err => console.log(err));
+                }
             };
             __decorate([
                 domInject_1.domInject('#date')

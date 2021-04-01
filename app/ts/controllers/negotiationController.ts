@@ -1,6 +1,7 @@
 import { MessageView, NegotiationsView } from '../views/index';
 import { Negotiations, Negotiation } from '../models/index';
 import { domInject } from '../helpers/decorators/domInject';
+import { PartialNegotiation } from '../models/partialNegotiation'
 // import { logRuntime } from '../helpers/decorators/index';
 
 export class NegotiationController {
@@ -63,6 +64,29 @@ export class NegotiationController {
     private _isBusinessDay(date: Date) {
         
         return date.getDay() != DayOfWeek.Saturday && date.getDay() != DayOfWeek.Sunday;
+    }
+
+    importData() {
+        
+        function isOk(res: Response) {
+
+            if(res.ok) {
+                return res;
+            } else {
+                throw new Error(res.statusText);
+            }
+        }
+        fetch('http://localhost:8080/dados')
+            .then(res => isOk(res))
+            .then(res => res.json())
+            .then((dados: PartialNegotiation[]) => {
+                dados
+                .map(dado => new Negotiation(new Date(), dado.vezes, dado.montante))
+                .forEach(negotiation => this._negotiations.add(negotiation))
+                this._negotiationsView.update(this._negotiations);
+                
+             } )
+            .catch(err => console.log(err)); 
     }
 }
 
