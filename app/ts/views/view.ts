@@ -14,7 +14,7 @@ export abstract class View<T> {
         this._escape = escape;
     }
 
-    @logRuntime()
+    @logRuntime(true)
     update(model: T): void {
 
         this._element.html(this.template(model));
