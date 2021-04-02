@@ -2,6 +2,7 @@ import { MessageView, NegotiationsView } from '../views/index';
 import { Negotiations, Negotiation } from '../models/index';
 import { PartialNegotiation } from '../models/partialNegotiation';
 import { domInject, debounce } from '../helpers/decorators/index';
+import { NegotiationService } from '../services/index';
 // import { logRuntime } from '../helpers/decorators/index';
 
 export class NegotiationController {
@@ -20,6 +21,8 @@ export class NegotiationController {
     private _negotiations = new Negotiations();
     private _negotiationsView = new NegotiationsView('#negotiationsView', true);
     private _messageView = new  MessageView('#messageView', true);
+
+    private _service = new NegotiationService();
 
     constructor() {
         // by the moment controller is instantiated, the dom elements will be available to manipulate
@@ -48,6 +51,8 @@ export class NegotiationController {
             parseFloat(this._inputValue.val())
         );
 
+        negotiation.toText();
+
         this._negotiations.add(negotiation);
 
         this._negotiations.toArray().forEach(negotiation => {
@@ -68,25 +73,24 @@ export class NegotiationController {
     @debounce()
     importData() {
         
-        function isOk(res: Response) {
+        this._service
 
-            if(res.ok) {
-                return res;
-            } else {
-                throw new Error(res.statusText);
-            }
-        }
-
-        fetch('http://localhost:8080/dados')
-            .then(res => isOk(res))
-            .then(res => res.json())
-            .then((dados: PartialNegotiation[]) => {
-                dados
-                    .map(dado => new Negotiation(new Date(), dado.vezes, dado.montante))
-                    .forEach(negotiation => this._negotiations.add(negotiation))
-                this._negotiationsView.update(this._negotiations);
+            .obtainNegotiation(res => {
+                if(res.ok) {
+                    return res;
+                } else {
+                    throw new Error(res.statusText);
+                }
             })
-            .catch(err => console.error(err));
+            .then(negotiations => {
+
+
+                 negotiations.forEach(negotiation => 
+                 this._negotiations.add(negotiation));
+
+                 this._negotiationsView.update(this._negotiations);
+
+            });
     }
 }
 

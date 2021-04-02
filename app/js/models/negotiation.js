@@ -14,6 +14,12 @@ System.register([], function (exports_1, context_1) {
                 get volume() {
                     return this.amount * this.value;
                 }
+                toText() {
+                    console.log(`Data: $(this.date), 
+            Quantidade: ${this.amount}, 
+            Valor: ${this.value}, 
+            Volume: ${this.volume}`);
+                }
             };
             exports_1("Negotiation", Negotiation);
         }
