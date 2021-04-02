@@ -1,7 +1,7 @@
-import { Negotiation, Printable } from './index'
+import {Negotiation, Printable } from './index'
 
 // class to store the negotiations and prevent modifications at the list of negotiations made
-export class Negotiations extends Printable {
+export class Negotiations implements Printable {
     // defining the type of array
     // Array<Negotiation> === Negotiation[]
     private _negotiations: Negotiation[] = [];

@@ -1,5 +1,5 @@
-export abstract class Printable {
+export interface Printable {
 
-    abstract toText(): void;
+     toText(): void;
 
 }
