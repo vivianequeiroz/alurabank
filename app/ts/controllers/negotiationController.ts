@@ -87,13 +87,18 @@ export class NegotiationController {
                     throw new Error(res.statusText);
                 }
             })
-            .then(negotiations => {
+            .then(negotiationsToImport => {
 
+                const negotiationsAlreadyImported = this._negotiations.toArray();
 
-                 negotiations.forEach(negotiation => 
-                 this._negotiations.add(negotiation));
+                negotiationsToImport
+                    .filter(negotiation => 
+                        !negotiationsAlreadyImported.some(alreadyImported => 
+                            negotiation.isEqual(alreadyImported)))
+                    .forEach(negotiation => 
+                        this._negotiations.add(negotiation));
 
-                 this._negotiationsView.update(this._negotiations);
+                this._negotiationsView.update(this._negotiations);
 
             });
     }

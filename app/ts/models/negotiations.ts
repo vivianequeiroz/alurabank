@@ -1,7 +1,8 @@
-import {Negotiation, Printable } from './index'
+import {Negotiation, Printable } from './index';
+import { Comparable } from './comparable';
 
 // class to store the negotiations and prevent modifications at the list of negotiations made
-export class Negotiations implements Printable {
+export class Negotiations implements Printable, Comparable<Negotiations> {
     // defining the type of array
     // Array<Negotiation> === Negotiation[]
     private _negotiations: Negotiation[] = [];
@@ -25,6 +26,11 @@ export class Negotiations implements Printable {
 
         console.log('Impressão dos dados da negociação:');
         console.log(JSON.stringify(this._negotiations));
+    }
+
+    isEqual(negotiations: Negotiations): boolean {
+
+        return JSON.stringify(this._negotiations) == JSON.stringify(negotiations.toArray());
     }
 
 }
