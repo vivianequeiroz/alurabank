@@ -96,7 +96,8 @@ export class NegotiationController {
                         this._negotiations.add(negotiation));
 
                 this._negotiationsView.update(this._negotiations);
-            });
+            })
+            .catch(err => this._messageView.update(err.message));
     }
 }
 
