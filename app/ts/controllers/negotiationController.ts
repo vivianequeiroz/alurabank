@@ -1,9 +1,9 @@
 import { MessageView, NegotiationsView } from '../views/index';
 import { Negotiations, Negotiation } from '../models/index';
-import { PartialNegotiation } from '../models/partialNegotiation';
 import { domInject, debounce } from '../helpers/decorators/index';
 import { NegotiationService } from '../services/index';
 import { print } from '../helpers/index';
+import { PartialNegotiation } from '../models/index';
 // import { logRuntime } from '../helpers/decorators/index';
 
 export class NegotiationController {
@@ -52,10 +52,7 @@ export class NegotiationController {
             parseFloat(this._inputValue.val())
         );
 
-   
-
         this._negotiations.add(negotiation);
-
         print(negotiation);
 
         this._negotiations.toText();
@@ -99,7 +96,6 @@ export class NegotiationController {
                         this._negotiations.add(negotiation));
 
                 this._negotiationsView.update(this._negotiations);
-
             });
     }
 }

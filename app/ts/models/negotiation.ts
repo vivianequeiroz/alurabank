@@ -1,7 +1,6 @@
-import { Printable } from './printable';
-import { Comparable } from './comparable';
+import { MyObject } from './MyObject';
 
-export class Negotiation implements Printable, Comparable<Negotiation> {
+export class Negotiation implements MyObject<Negotiation> {
 
     constructor (readonly date: Date, readonly amount: number, readonly value: number) {}
 
@@ -27,4 +26,6 @@ export class Negotiation implements Printable, Comparable<Negotiation> {
         && this.date.getMonth() === negotiation.date.getMonth()
         && this.date.getFullYear() === negotiation.date.getFullYear();
     }
+
+
 }
