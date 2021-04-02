@@ -1,7 +1,7 @@
 import { MessageView, NegotiationsView } from '../views/index';
 import { Negotiations, Negotiation } from '../models/index';
-import { domInject } from '../helpers/decorators/domInject';
-import { PartialNegotiation } from '../models/partialNegotiation'
+import { PartialNegotiation } from '../models/partialNegotiation';
+import { domInject, debounce } from '../helpers/decorators/index';
 // import { logRuntime } from '../helpers/decorators/index';
 
 export class NegotiationController {
@@ -30,10 +30,9 @@ export class NegotiationController {
     }
     
     // @logRuntime()
-    add(event: Event) {
+    @debounce()
+    add() {
        
-        event.preventDefault();
-
         let date = new Date(this._inputDate.val().replace(/-/g, ','));
 
         if(!this._isBusinessDay(date)) {
@@ -66,6 +65,7 @@ export class NegotiationController {
         return date.getDay() != DayOfWeek.Saturday && date.getDay() != DayOfWeek.Sunday;
     }
 
+    @debounce()
     importData() {
         
         function isOk(res: Response) {
@@ -76,27 +76,27 @@ export class NegotiationController {
                 throw new Error(res.statusText);
             }
         }
+
         fetch('http://localhost:8080/dados')
             .then(res => isOk(res))
             .then(res => res.json())
             .then((dados: PartialNegotiation[]) => {
                 dados
-                .map(dado => new Negotiation(new Date(), dado.vezes, dado.montante))
-                .forEach(negotiation => this._negotiations.add(negotiation))
+                    .map(dado => new Negotiation(new Date(), dado.vezes, dado.montante))
+                    .forEach(negotiation => this._negotiations.add(negotiation))
                 this._negotiationsView.update(this._negotiations);
-                
-             } )
-            .catch(err => console.log(err)); 
+            })
+            .catch(err => console.error(err));
     }
 }
 
 
 enum DayOfWeek {
-    Sunday,
-    Monday,
-    Tuesday,
-    Wednesday,
-    Thursday,
-    Friday,
-    Saturday
+        Sunday,
+        Monday,
+        Tuesday,
+        Wednesday,
+        Thursday,
+        Friday,
+        Saturday
 }

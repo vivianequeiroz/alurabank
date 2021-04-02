@@ -1,4 +1,4 @@
-System.register(["../views/index", "../models/index", "../helpers/decorators/domInject"], function (exports_1, context_1) {
+System.register(["../views/index", "../models/index", "../helpers/decorators/index"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["../views/index", "../models/index", "../helpers/decorators/dom
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var index_1, index_2, domInject_1, NegotiationController, DayOfWeek;
+    var index_1, index_2, index_3, NegotiationController, DayOfWeek;
     return {
         setters: [
             function (index_1_1) {
@@ -16,8 +16,8 @@ System.register(["../views/index", "../models/index", "../helpers/decorators/dom
             function (index_2_1) {
                 index_2 = index_2_1;
             },
-            function (domInject_1_1) {
-                domInject_1 = domInject_1_1;
+            function (index_3_1) {
+                index_3 = index_3_1;
             }
         ],
         execute: function () {
@@ -28,8 +28,7 @@ System.register(["../views/index", "../models/index", "../helpers/decorators/dom
                     this._messageView = new index_1.MessageView('#messageView', true);
                     this._negotiationsView.update(this._negotiations);
                 }
-                add(event) {
-                    event.preventDefault();
+                add() {
                     let date = new Date(this._inputDate.val().replace(/-/g, ','));
                     if (!this._isBusinessDay(date)) {
                         this._messageView.update('Somente negociações em dias úteis podem ser registradas!');
@@ -66,18 +65,24 @@ System.register(["../views/index", "../models/index", "../helpers/decorators/dom
                             .forEach(negotiation => this._negotiations.add(negotiation));
                         this._negotiationsView.update(this._negotiations);
                     })
-                        .catch(err => console.log(err));
+                        .catch(err => console.error(err));
                 }
             };
             __decorate([
-                domInject_1.domInject('#date')
+                index_3.domInject('#date')
             ], NegotiationController.prototype, "_inputDate", void 0);
             __decorate([
-                domInject_1.domInject('#amount')
+                index_3.domInject('#amount')
             ], NegotiationController.prototype, "_inputAmount", void 0);
             __decorate([
-                domInject_1.domInject('#value')
+                index_3.domInject('#value')
             ], NegotiationController.prototype, "_inputValue", void 0);
+            __decorate([
+                index_3.debounce()
+            ], NegotiationController.prototype, "add", null);
+            __decorate([
+                index_3.debounce()
+            ], NegotiationController.prototype, "importData", null);
             exports_1("NegotiationController", NegotiationController);
             (function (DayOfWeek) {
                 DayOfWeek[DayOfWeek["Sunday"] = 0] = "Sunday";

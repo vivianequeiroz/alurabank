@@ -12,6 +12,7 @@ System.register(["./view", "./messageView", "./negotiationsView"], function (exp
         setters: [
             function (view_1_1) {
                 exportStar_1(view_1_1);
+                exportStar_1(view_1_1);
             },
             function (messageView_1_1) {
                 exportStar_1(messageView_1_1);
