@@ -1,4 +1,4 @@
-System.register(["../views/index", "../models/index", "../helpers/decorators/index", "../services/index"], function (exports_1, context_1) {
+System.register(["../views/index", "../models/index", "../helpers/decorators/index", "../services/index", "../helpers/index"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["../views/index", "../models/index", "../helpers/decorators/ind
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var index_1, index_2, index_3, index_4, NegotiationController, DayOfWeek;
+    var index_1, index_2, index_3, index_4, index_5, NegotiationController, DayOfWeek;
     return {
         setters: [
             function (index_1_1) {
@@ -21,6 +21,9 @@ System.register(["../views/index", "../models/index", "../helpers/decorators/ind
             },
             function (index_4_1) {
                 index_4 = index_4_1;
+            },
+            function (index_5_1) {
+                index_5 = index_5_1;
             }
         ],
         execute: function () {
@@ -39,8 +42,9 @@ System.register(["../views/index", "../models/index", "../helpers/decorators/ind
                         return;
                     }
                     const negotiation = new index_2.Negotiation(new Date(this._inputDate.val().replace(/-/g, ',')), parseInt(this._inputAmount.val()), parseFloat(this._inputValue.val()));
-                    negotiation.toText();
                     this._negotiations.add(negotiation);
+                    index_5.print(negotiation);
+                    this._negotiations.toText();
                     this._negotiations.toArray().forEach(negotiation => {
                         console.log(negotiation.date);
                         console.log(negotiation.amount);
