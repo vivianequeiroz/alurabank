@@ -73,31 +73,34 @@ export class NegotiationController {
     }
 
     @debounce()
-    importData() {
+    async importData() {
+
+        try {
+
+            const negotiationsToImport = await this._service
+                .obtainNegotiation(res => {
+                    if(res.ok) {
+                        return res;
+                    } else {
+                        throw new Error(res.statusText);
+                    }
+                });
+                
+            const negotiationsAlreadyImported = this._negotiations.toArray();
+    
+            negotiationsToImport
+                .filter(negotiation => 
+                    !negotiationsAlreadyImported.some(alreadyImported => 
+                        negotiation.isEqual(alreadyImported)))
+                .forEach(negotiation => 
+                    this._negotiations.add(negotiation));
+    
+            this._negotiationsView.update(this._negotiations);
+               
+        } catch (err) {
+            this._messageView.update(err.message);
+        }
         
-        this._service
-
-            .obtainNegotiation(res => {
-                if(res.ok) {
-                    return res;
-                } else {
-                    throw new Error(res.statusText);
-                }
-            })
-            .then(negotiationsToImport => {
-
-                const negotiationsAlreadyImported = this._negotiations.toArray();
-
-                negotiationsToImport
-                    .filter(negotiation => 
-                        !negotiationsAlreadyImported.some(alreadyImported => 
-                            negotiation.isEqual(alreadyImported)))
-                    .forEach(negotiation => 
-                        this._negotiations.add(negotiation));
-
-                this._negotiationsView.update(this._negotiations);
-            })
-            .catch(err => this._messageView.update(err.message));
     }
 }
 
