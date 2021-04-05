@@ -15,7 +15,7 @@ System.register([], function (exports_1, context_1) {
                     return this.amount * this.value;
                 }
                 toText() {
-                    console.log('Impressão dos dados da negociação:');
+                    console.log('Negotiation info:');
                     console.log(`Data: ${this.date}, 
             Quantidade: ${this.amount}, 
             Valor: ${this.value}, 

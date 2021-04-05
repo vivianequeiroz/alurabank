@@ -16,7 +16,7 @@ System.register([], function (exports_1, context_1) {
                     return [].concat(this._negotiations);
                 }
                 toText() {
-                    console.log('Impressão dos dados da negociação:');
+                    console.log('Negotiation info: ');
                     console.log(JSON.stringify(this._negotiations));
                 }
                 isEqual(negotiations) {

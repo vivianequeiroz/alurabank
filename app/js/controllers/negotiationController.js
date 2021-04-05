@@ -46,7 +46,7 @@ System.register(["../views/index", "../models/index", "../helpers/decorators/ind
                 add() {
                     let date = new Date(this._inputDate.val().replace(/-/g, ','));
                     if (!this._isBusinessDay(date)) {
-                        this._messageView.update('Somente negociações em dias úteis podem ser registradas!');
+                        this._messageView.update('Negotiations are only accepted in business days!');
                         return;
                     }
                     const negotiation = new index_2.Negotiation(new Date(this._inputDate.val().replace(/-/g, ',')), parseInt(this._inputAmount.val()), parseFloat(this._inputValue.val()));
@@ -59,7 +59,7 @@ System.register(["../views/index", "../models/index", "../helpers/decorators/ind
                         console.log(negotiation.value);
                     });
                     this._negotiationsView.update(this._negotiations);
-                    this._messageView.update('Negociação adicionada com sucesso!');
+                    this._messageView.update('Negotiation successfully added!');
                 }
                 _isBusinessDay(date) {
                     return date.getDay() != DayOfWeek.Saturday && date.getDay() != DayOfWeek.Sunday;

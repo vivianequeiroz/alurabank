@@ -18,7 +18,7 @@ System.register(["../models/index"], function (exports_1, context_1) {
                         .map(dado => new index_1.Negotiation(new Date(), dado.vezes, dado.montante)))
                         .catch(err => {
                         console.error(err);
-                        throw new Error('Não foi possível importar as negociações :(');
+                        throw new Error('It wasn\'t possible to import negotiations :(');
                     });
                 }
             };

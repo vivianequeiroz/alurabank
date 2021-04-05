@@ -15,9 +15,9 @@ System.register(["./view"], function (exports_1, context_1) {
         <table class="table table-hover table-bordered">
         <thead>
             <tr>
-                <th>DATA</th>
-                <th>QUANTIDADE</th>
-                <th>VALOR</th>
+                <th>DATE</th>
+                <th>AMOUNT</th>
+                <th>VALUE</th>
                 <th>VOLUME</th>
             </tr>
         </thead>

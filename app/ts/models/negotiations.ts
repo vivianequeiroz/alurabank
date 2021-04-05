@@ -24,7 +24,7 @@ export class Negotiations implements MyObject<Negotiations> {
 
     toText(): void {
 
-        console.log('Impressão dos dados da negociação:');
+        console.log('Negotiation info: ');
         console.log(JSON.stringify(this._negotiations));
     }
 

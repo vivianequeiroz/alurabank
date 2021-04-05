@@ -41,7 +41,7 @@ export class NegotiationController {
 
         if(!this._isBusinessDay(date)) {
 
-            this._messageView.update('Somente negociações em dias úteis podem ser registradas!');
+            this._messageView.update('Negotiations are only accepted in business days!');
             return 
         }
 
@@ -64,7 +64,7 @@ export class NegotiationController {
         })
 
         this._negotiationsView.update(this._negotiations);
-        this._messageView.update('Negociação adicionada com sucesso!');
+        this._messageView.update('Negotiation successfully added!');
     }
 
     private _isBusinessDay(date: Date) {
